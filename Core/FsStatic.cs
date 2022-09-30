@@ -15,8 +15,7 @@ namespace FrogSharp.Core
         public FsStatic(string methodString, CultureInfo cultureInfo)
         {
             this.methodString = methodString;
-            var variable = new FsObject();
-            variable.Add(0);
+            var variable = new FsObject { 0 };
             Variables.Add(string.Empty, variable);
             this.cultureInfo = cultureInfo;
         }

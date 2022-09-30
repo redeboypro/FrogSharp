@@ -13,10 +13,10 @@ namespace FrogSharp.Core
         protected FsCallable Parent;
         public readonly Dictionary<string, int> Arguments = new Dictionary<string, int>();
         protected readonly Dictionary<string, FsObject> Variables = new Dictionary<string, FsObject>();
-        public readonly List<FsCodeElement> Elements = new List<FsCodeElement>();
-        public readonly Dictionary<string, FsCallable> Methods = new Dictionary<string, FsCallable>();
-        public readonly Dictionary<string, float> Temporary = new Dictionary<string, float>();
-        public ReturnEvent Returnable;
+        protected readonly List<FsCodeElement> Elements = new List<FsCodeElement>();
+        protected readonly Dictionary<string, FsCallable> Methods = new Dictionary<string, FsCallable>();
+        private readonly Dictionary<string, float> Temporary = new Dictionary<string, float>();
+        protected ReturnEvent Returnable;
 
         public float GetAsSingle(string variable) => GetObject(variable).AsSingle;
         public string GetAsString(string variable) => GetObject(variable).AsString;
@@ -28,6 +28,12 @@ namespace FrogSharp.Core
         {
             if (Variables.ContainsKey(variable)) return Variables[variable];
             return Parent.Variables.ContainsKey(variable) ? Parent.GetObject(variable) : null;
+        }
+        
+        public FsCallable GetMethod(string method)
+        {
+            if (Methods.ContainsKey(method)) return Methods[method];
+            return Parent.Methods.ContainsKey(method) ? Parent.GetMethod(method) : null;
         }
 
         protected FsCallable()
@@ -265,7 +271,7 @@ namespace FrogSharp.Core
             if (!Methods.ContainsKey(funLink) && funLink.Contains(Constants.Separator))
                 Methods.Add(funLink, new FsStatic(funLink, cultureInfo) {Parent = this});
 
-            var fun = Methods[funLink];
+            var fun = GetMethod(funLink);
 
             if (fun.Arguments.Count > 0) fun.Arguments.Clear();
 
