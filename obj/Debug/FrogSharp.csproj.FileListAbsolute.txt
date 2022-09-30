@@ -1,0 +1,6 @@
+D:\GameEngine\FrogSharp\FrogSharp\bin\Debug\FrogSharp.dll
+D:\GameEngine\FrogSharp\FrogSharp\bin\Debug\FrogSharp.pdb
+D:\GameEngine\FrogSharp\FrogSharp\obj\Debug\FrogSharp.csprojAssemblyReference.cache
+D:\GameEngine\FrogSharp\FrogSharp\obj\Debug\FrogSharp.csproj.CoreCompileInputs.cache
+D:\GameEngine\FrogSharp\FrogSharp\obj\Debug\FrogSharp.dll
+D:\GameEngine\FrogSharp\FrogSharp\obj\Debug\FrogSharp.pdb
