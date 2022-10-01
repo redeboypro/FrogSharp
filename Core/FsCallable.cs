@@ -27,8 +27,15 @@ namespace FrogSharp.Core
         public FsObject GetObject(string variable)
         {
             if (Variables.ContainsKey(variable)) return Variables[variable];
-            return Parent.Variables.ContainsKey(variable) ? Parent.GetObject(variable) : null;
+            if (Parent == this) return GetFromMethod(variable);
+            
+            var obj =  Parent.GetObject(variable);
+            return obj ?? GetFromMethod(variable);
         }
+        
+        private FsObject GetFromMethod(string variable) => Parent.Methods.Values.Where
+                (method => method.Variables.ContainsKey(variable))
+            .Select(method => method.Variables[variable]).FirstOrDefault();
         
         public FsCallable GetMethod(string method)
         {
